@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>အဖြေမှန်ကိုရွေးပါ</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1, #84fab0);
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .page {
+            display: none;
+            animation: fade 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic {
+            text-align: center;
+            color: white;
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            text-align: center;
+            color: white;
+            font-size: 26px;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        .photo-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .choice {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 20px;
+            border-radius: 25px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .choice:hover {
+            transform: translateY(-8px);
+        }
+
+        .choice img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.06);
+        }
+
+        .message {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: yellow;
+        }
+
+        .finish {
+            text-align: center;
+            color: white;
+        }
+
+        .finish h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .finish p {
+            font-size: 24px;
+            line-height: 1.6;
+        }
+
+        .restart-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            color: #ff4b7d;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.08);
+        }
+
+        /* MOBILE STYLE */
+
+        @media(max-width:768px) {
+
+            .photo-box {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .topic {
+                font-size: 24px;
+            }
+
+            .question {
+                font-size: 18px;
+            }
+
+            .choice {
+                padding: 10px;
+            }
+
+            .choice img {
+                height: 150px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .finish h1 {
+                font-size: 40px;
+            }
+
+            .finish p {
+                font-size: 18px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- PAGE 1 -->
+        <div class="page active" id="page1">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="1.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg1')">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="2.jpg">
+
+                        <button class="btn" onclick="nextPage(2)">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    အရံလူကိုရွေးပါ
+                </div>
+
+                <div class="message" id="msg1"></div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE 2 -->
+        <div class="page" id="page2">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="3.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg2')">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="4.jpg">
+
+                        <button class="btn" onclick="nextPage(3)">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    ဂျိုပေါက်နေသောသတ္တဝါအားရွေးပါ
+                </div>
+
+                <div class="message" id="msg2"></div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE 3 -->
+        <div class="page" id="page3">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="5.jpg">
+
+                        <button class="btn" onclick="nextPage(4)">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="6.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg3')">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    ခြေများသောအကောင်ကိုရွေးပါ
+                </div>
+
+                <div class="message" id="msg3"></div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE 4 -->
+        <div class="page" id="page4">
+
+            <div class="card">
+
+                <div class="topic">အဖြေမှန်ကိုရွေးပါ</div>
+
+                <div class="photo-box">
+
+                    <!-- WRONG -->
+                    <div class="choice">
+                        <img src="7.jpg">
+
+                        <button class="btn" onclick="wrongAnswer('msg4')">
+                            Choose
+                        </button>
+                    </div>
+
+                    <!-- CORRECT -->
+                    <div class="choice">
+                        <img src="8.jpg">
+
+                        <button class="btn" onclick="nextPage(5)">
+                            Choose
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="question">
+                    ပေါင်းစပ်လို့မရတဲ့အရာနှစ်ခုကိုရွေးပါ
+                </div>
+
+                <div class="message" id="msg4"></div>
+
+            </div>
+
+        </div>
+
+        <!-- PAGE 5 -->
+        <div class="page" id="page5">
+
+            <div class="card finish">
+
+                <h1>✉️အမှာစာ ✉️</h1>
+
+                <p>
+                    ချစ်တယ်ဆိုပြီး ယုံခဲ့မိတာတွေလည်း တို့အမှားပါ
+                    မချစ်ဘူးဆိုတာသိရက်နဲ့ရှေ့တိုးမိတာလည်း တို့အမှားပါ
+                    အရာရာတို့အမှားသာဖြစ်လို့ နောက်လူရင်မှာပျော်ပါစေလို့ ဆုတောင်းပေးပါတယ်
+                </p>
+
+                <button class="restart-btn" onclick="restartQuiz()">
+                    Restart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function nextPage(pageNumber) {
+
+            let pages = document.querySelectorAll('.page');
+
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            document.getElementById('page' + pageNumber).classList.add('active');
+        }
+
+        function wrongAnswer(messageId) {
+
+            document.getElementById(messageId).innerHTML = "❌ Wrong Answer! Try Again!";
+        }
+
+        function restartQuiz() {
+
+            let pages = document.querySelectorAll('.page');
+
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            document.getElementById('page1').classList.add('active');
+
+            let messages = document.querySelectorAll('.message');
+
+            messages.forEach(msg => {
+                msg.innerHTML = "";
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
